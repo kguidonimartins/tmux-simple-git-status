@@ -37,7 +37,7 @@ git_status() {
   local changes=$(git_changes)
 
   if [[ -n $status ]]; then
-    printf " $status $changes"
+    printf " #[fg=red]  $status $changes"
   fi
 }
 
