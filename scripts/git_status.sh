@@ -8,20 +8,21 @@ git_changes() {
   local changes_array=(${changes//;/ })
   local untracked=$(git status -sbu 2>/dev/null | grep -c "^??")
   local result=()
-  
+
   if [[ $untracked != 0 ]]; then
-    result+=("?$untracked")
+    result+=("#[fg=green]?$untracked")
   fi
+
   if [[ -n ${changes_array[0]} ]]; then
-    result+=("~${changes_array[0]}")
+    result+=("#[fg=yellow]~${changes_array[0]}")
   fi
 
   if [[ -n ${changes_array[1]} ]]; then
-    result+=("+${changes_array[1]}")
+    result+=("#[fg=blue]+${changes_array[1]}")
   fi
 
   if [[ -n ${changes_array[2]} ]]; then
-    result+=("-${changes_array[2]}")
+    result+=("#[fg=red]-${changes_array[2]}")
   fi
 
   local joined=$(printf " %s" "${result[@]}")
