@@ -35,10 +35,11 @@ git_changes() {
 
 git_status() {
   local status=$(git rev-parse --abbrev-ref HEAD)
+  local ahead_behind="#[fg=white]$(git status -sb | head -n 1 | egrep -o "\[.*]" | sed "s/behind /⇣/g" | sed "s/ahead /⇡/g")"
   local changes=$(git_changes)
 
   if [[ -n $status ]]; then
-    printf " #[fg=red]  $status $changes"
+    printf "#[fg=red]  $status $ahead_behind $changes"
   fi
 }
 
