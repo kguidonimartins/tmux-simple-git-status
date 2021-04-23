@@ -13,14 +13,17 @@ git_changes() {
     result+=("#[fg=green]?$untracked")
   fi
 
+  # count modified files
   if [[ -n ${changes_array[0]} ]]; then
-    result+=("#[fg=yellow]~${changes_array[0]}")
+    result+=("#[fg=yellow]!${changes_array[0]}")
   fi
 
+  # count added lines
   if [[ -n ${changes_array[1]} ]]; then
     result+=("#[fg=blue]+${changes_array[1]}")
   fi
 
+  # count removed lines
   if [[ -n ${changes_array[2]} ]]; then
     result+=("#[fg=red]-${changes_array[2]}")
   fi
